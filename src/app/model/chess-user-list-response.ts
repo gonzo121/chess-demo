@@ -1,6 +1,6 @@
 import { TtUsuario } from "./ttusuario";
 
-export class Response{
+export class ChessUserListResponse{
     response : { 
         dsUsuariosDemo: { 
             ttusuarios: Array<TtUsuario> 

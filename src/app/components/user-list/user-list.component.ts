@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Response } from 'src/app/model/chess-response';
 import { ChessUserListResponse } from 'src/app/model/chess-user-list-response';
 import { TtUsuario } from 'src/app/model/ttusuario';
 import { UsersService } from 'src/app/services/users.service';
@@ -11,7 +10,8 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class UserListComponent implements OnInit {
 
-  public userList: Array<TtUsuario> = []
+  public userList: Array<TtUsuario> = [];
+  public displayedColumns: string[] = ["nrousu", "usuario", "nombre", "activo", "email", "direccion", "telefono"];
 
   constructor(
     private _usersService : UsersService
