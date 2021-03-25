@@ -6,9 +6,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { UserDataComponent } from './components/user-list/user-data/user-data.component';
-import { InviteUserComponent } from './components/user-list/invite-user/invite-user.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+//Material
 import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
+
+import { ReactiveFormsModule } from '@angular/forms';
+import { DeleteUserComponent } from './components/user-list/user-data/delete-user/delete-user.component';
 
 
 @NgModule({
@@ -16,14 +27,21 @@ import { MatTableModule } from '@angular/material/table';
     AppComponent,
     UserListComponent,
     UserDataComponent,
-    InviteUserComponent
+    DeleteUserComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatTableModule,
-    HttpClientModule
+    MatDialogModule,
+    HttpClientModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatCheckboxModule,
+    MatButtonModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,11 @@
+<div mat-dialog-title class="delete-dialog-title">
+    <h4 class="delete-title">Borrar usuario</h4>    
+    <span mat-dialog-close class="fas fa-times user-data-dialog-close"></span>
+</div>
+<mat-dialog-content>
+    <p>Esta seguro de que quiere borrar al usuario {{showUser()}}</p>
+</mat-dialog-content>
+<mat-dialog-actions class="dialog-buttons-actions">
+    <button mat-dialog-close class="dialog-button"><span>Cancelar</span></button>
+    <button class="dialog-button primary-button" (click)="deleteUser()"><span>Borrar</span></button>
+</mat-dialog-actions>

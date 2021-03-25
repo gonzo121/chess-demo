@@ -1,1 +1,96 @@
-<p>user-data works!</p>
+<div mat-dialog-title class="user-data-title">
+    <h1 class="title">Datos de usuario</h1>    
+    <div class="icon-container">
+        <i class="fas fa-trash-alt delete-icon" aria-hidden="true" (click)="openDeleteUserDialog()"></i>
+        <i *ngIf="!isInvite" mat-dialog-close class="fas fa-times user-data-dialog-close"></i>
+    </div>
+</div>
+
+<mat-dialog-content class="user-data-dialog-content">
+
+    <form class="user-data-form" [formGroup]="userForm">
+
+        <div class="row">
+            <h3>Usuario</h3>
+            <mat-form-field class="user-data-field" appearance="standard">
+                <mat-label>Número de usuario</mat-label>
+                <input matInput formControlName="nrousu">
+            </mat-form-field>
+    
+            <mat-form-field class="user-data-field" appearance="standard">
+                <mat-label>Usuario</mat-label>
+                <input matInput formControlName="usuario">
+            </mat-form-field>
+
+            <mat-form-field class="user-data-field" appearance="standard">
+                <mat-label>Clave</mat-label>
+                <input matInput formControlName="clave">
+            </mat-form-field>
+
+            <mat-checkbox color="primary" class="example-margin" formControlName="activo">Activo</mat-checkbox>
+
+        </div>
+        
+        <div class="row">
+            <h3>Nombre y apellido</h3>
+            <mat-form-field class="user-data-field" appearance="standard">
+                <mat-label>Nombre</mat-label>
+                <input matInput formControlName="nombre">
+            </mat-form-field>
+    
+            <mat-form-field class="user-data-field" appearance="standard">
+                <mat-label>Apellido</mat-label>
+                <input matInput formControlName="apellido">
+            </mat-form-field>    
+        </div>
+           
+        <div class="row">
+            <h3>Datos adicionales</h3>
+
+            <mat-form-field class="user-data-field" appearance="standard">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email">
+            </mat-form-field>
+    
+            <mat-form-field class="user-data-field" appearance="standard">
+                <mat-label>Dirección</mat-label>
+                <input matInput formControlName="direccion">
+            </mat-form-field>
+    
+            <mat-form-field class="user-data-field" appearance="standard">
+                <mat-label>Teléfono</mat-label>
+                <input matInput formControlName="telefono">
+            </mat-form-field>
+        </div>
+        
+
+        <div class="img-container" style="display: grid;">
+            <div class="form-group">
+                <fieldset class="form-group">
+    
+                    {{imageError}}
+                    <div class="custom-file">
+                        <input type="file" (change)="fileChangeEvent($event)" class="fileInputProfile">
+                        <div class="img-space">
+                            <ng-container *ngIf="isImageSaved">
+                                <img [src]="cardImageBase64" />
+                            </ng-container>                        
+    
+                        </div>
+    
+                    </div>
+                </fieldset>
+    
+            </div>
+            <button mat-button class=" btn chess-button chess-save-button" (click)="removeImage()" *ngIf="isImageSaved">Eliminar imagen</button>
+    
+        </div>
+       
+    </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions class="dialog-buttons-actions">
+    <button mat-button mat-dialog-close class="btn chess-button cancel-button"><span>Cancelar</span></button>
+    <button mat-button class="btn chess-button chess-save-button" [disabled]="!userForm.valid" (click)="isInvite? createUser() : updateUser()" ><span>{{showButtonLabel()}}</span></button>
+</mat-dialog-actions>

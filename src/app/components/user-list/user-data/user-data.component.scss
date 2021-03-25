@@ -1,0 +1,85 @@
+.user-data-title{
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 1rem;
+    color: dimgrey;
+
+    .title{
+        margin: auto;
+    }
+
+    .user-data-dialog-close{
+        cursor: pointer;
+    }
+
+    .delete-icon{
+        cursor: pointer;
+        margin-right: 1vw;
+    }
+}
+
+.user-data-dialog-content{
+    max-height: 60vh;
+
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #d6d8da;
+    }
+
+    .user-data-form{
+
+        .row{
+            margin-bottom: 5vh;
+
+            .user-data-field{
+                margin-right: 1rem;
+            }
+        }
+    
+    }
+
+    
+}
+
+.dialog-buttons-actions {
+    width: 100%;
+    margin: auto;
+
+    margin-top: 15px;
+    justify-content: center;
+
+    .btn.chess-button.chess-save-button {
+        color: #ffffff;
+        background: #1c96e1;
+
+        &:disabled{
+            background: #5fc2ff;
+        }
+    }
+
+    .btn.chess-button {
+        font-family: 'Roboto';
+        font-weight: 400;
+        font-size: 13px;
+        padding: 6px 12px;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        text-transform: none;
+    }
+
+    .cancel-button{
+        background-color: #ffffff;
+        color: gray;
+    }
+}
+
+
+
+
+
+
