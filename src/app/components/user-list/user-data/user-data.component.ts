@@ -56,7 +56,6 @@ export class UserDataComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.userForm)
   }
 
 
@@ -86,9 +85,6 @@ export class UserDataComponent implements OnInit {
           image.onload = rs => {
               const img_height = rs.currentTarget['height'];
               const img_width = rs.currentTarget['width'];
-
-              console.log(img_height, img_width);
-
 
               if (img_height > max_height && img_width > max_width) {
                   this.imageError =
