@@ -6,6 +6,7 @@ import * as _ from 'lodash';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TtUsuario } from 'src/app/model/ttusuario';
 import { DeleteUserComponent } from './delete-user/delete-user.component';
+import { ErrorMessages } from 'src/app/model/error-messages';
 
 
 @Component({
@@ -119,8 +120,11 @@ export class UserDataComponent implements OnInit {
     let userArray : Array<TtUsuario> = []
     userArray.push(this.userForm.value)
     this._usersService.gestionarUsuarios("update", userArray).then(res => {
-      if(res && res.response.pcErr) this.openSnackBar(res.response.pcErr, "cerrar");
+      if(res && res.response.pcErr) this.openSnackBar(res.response.pcErr);
       else this._dialogRef.close(res);
+    }).catch(err => {
+      this.openSnackBar(ErrorMessages.SERVER_ERROR);
+      console.error(err)
     })
   }
 
@@ -128,13 +132,16 @@ export class UserDataComponent implements OnInit {
     let userArray : Array<TtUsuario> = []
     userArray.push(this.userForm.value)
     this._usersService.gestionarUsuarios("create", userArray).then(res => {
-      if(res && res.response.pcErr) this.openSnackBar(res.response.pcErr, "cerrar");
+      if(res && res.response.pcErr) this.openSnackBar(res.response.pcErr);
       else this._dialogRef.close(res);
+    }).catch(err => {
+      this.openSnackBar(ErrorMessages.SERVER_ERROR);
+      console.error(err)
     })
   }
 
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {
+  openSnackBar(message: string) {
+    this._snackBar.open(message, ErrorMessages.SNACKBAR_CLOSE, {
       duration: 2000,
     });
   }
@@ -152,9 +159,5 @@ export class UserDataComponent implements OnInit {
 
   public showButtonLabel(): string{
     return this.isInvite? "Crear" : "Actualizar"
-  }
-
-  public functionToDo() {
-    return this.isInvite? this.createUser() : this.updateUser()
-  }
+  }  
 }

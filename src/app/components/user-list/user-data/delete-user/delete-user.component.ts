@@ -3,6 +3,7 @@ import { TtUsuario } from 'src/app/model/ttusuario';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { UsersService } from 'src/app/services/users.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ErrorMessages } from 'src/app/model/error-messages';
 
 
 @Component({
@@ -29,19 +30,21 @@ export class DeleteUserComponent implements OnInit {
     let userArray : Array<TtUsuario> = []
     userArray.push(this.user)
     this._usersService.gestionarUsuarios("delete", userArray).then(res => {
-      if(res && res.response.pcErr) this.openSnackBar(res.response.pcErr, "cerrar");
+      if(res && res.response.pcErr) this.openSnackBar(res.response.pcErr);
       else this._dialogRef.close(res);
+    }).catch(err => {
+      this.openSnackBar(ErrorMessages.SERVER_ERROR);
+      console.error(err)
     })
   }
 
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {
+  openSnackBar(message: string) {
+    this._snackBar.open(message, ErrorMessages.SNACKBAR_CLOSE, {
       duration: 2000,
     });
   }
 
-  public showUser(): string {
-    
+  public showUser(): string {    
     return this.user.email? `${this.user.usuario} de email ${this.user.email}` : this.user.usuario;
   }
 }

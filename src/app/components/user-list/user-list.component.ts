@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ChessUserListResponse } from 'src/app/model/chess-user-list-response';
+import { ErrorMessages } from 'src/app/model/error-messages';
 import { TtUsuario } from 'src/app/model/ttusuario';
 import { UsersService } from 'src/app/services/users.service';
 import { UserDataComponent } from './user-data/user-data.component';
@@ -15,6 +16,7 @@ export class UserListComponent implements OnInit {
 
   public userList: Array<TtUsuario> = [];
   public displayedColumns: string[] = ["nrousu", "usuario", "email", "nombre", "apellido", "activo", "direccion", "telefono"];
+  
 
   constructor(
     private _usersService : UsersService,
@@ -32,8 +34,11 @@ export class UserListComponent implements OnInit {
   private _loadData(){
     this._usersService.obtenerUsuarios().then((res: ChessUserListResponse) => {
       if(res && !res.response.pcErr) this.userList = res.response.dsUsuariosDemo.ttusuarios.sort((a, b) => a.nrousu - b.nrousu);
-      else if (res.response.pcErr) this.openSnackBar(res.response.pcErr, "cerrar")
-      else this.openSnackBar("Ocurrio un error en el servidor", "cerrar")
+      else if (res.response.pcErr) this.openSnackBar(res.response.pcErr);
+      else this.openSnackBar(ErrorMessages.SERVER_ERROR);
+    }).catch(err => {
+      this.openSnackBar(ErrorMessages.SERVER_ERROR);
+      console.error(err);
     })
   }
 
@@ -48,8 +53,8 @@ export class UserListComponent implements OnInit {
     })
   }
 
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, {
+  openSnackBar(message: string) {
+    this._snackBar.open(message, ErrorMessages.SNACKBAR_CLOSE, {
       duration: 2000,
     });
   }
